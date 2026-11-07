@@ -5,6 +5,7 @@
   const root = document.getElementById('storm-replay');
   if (!root) return;
   const asset = new URL('assets/interlagos-storm.json', document.currentScript.src);
+  asset.searchParams.set('v', '20261107-upright');
   const byId = id => document.getElementById(id);
   const ns = 'http://www.w3.org/2000/svg';
   const timeline = byId('storm-timeline'), play = byId('storm-play');
