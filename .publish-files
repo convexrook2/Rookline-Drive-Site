@@ -59,3 +59,7 @@ tour.js
 .publish-files
 community.css
 assets/discord-mark.svg
+storm-replay.css
+storm-replay.js
+assets/interlagos-storm.json
+assets/interlagos-storm-poster.svg

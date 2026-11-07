@@ -8,7 +8,7 @@
 <meta property="og:title" content="Rookline Drive — One more lap."><meta property="og:description" content="Your car. Your cockpit. A desktop and VR HUD for Le Mans Ultimate."><meta property="og:type" content="website"><meta property="og:url" content="https://convexrook2.github.io/Rookline-Drive-Site/"><meta property="og:image" content="https://convexrook2.github.io/Rookline-Drive-Site/assets/portfolio-custom-speedo.jpg">
 <meta name="author" content="ConvexRook"><meta name="theme-color" content="#101722"><link rel="icon" href="assets/drive-icon.png">
 <link rel="preload" href="assets/Roboto-Variable.ttf" as="font" type="font/ttf" crossorigin>
-<link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="release-hud.css"><link rel="stylesheet" href="community.css"><script src="app.js?v=e4fb8e0" defer></script>
+<link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="release-hud.css"><link rel="stylesheet" href="community.css"><link rel="stylesheet" href="storm-replay.css?v=20261107"><script src="app.js?v=storm-20261107" defer></script><script src="storm-replay.js?v=20261107" defer></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -96,8 +96,25 @@
 </div>
 <section class="wetness-story" id="track-wetness" aria-labelledby="track-wetness-title">
 <div class="wetness-layout">
-<div class="wetness-copy"><span class="micro">A LITTLE RAIN CHECK / INTERLAGOS</span><h3 id="track-wetness-title">Here comes the dry line.</h3><p>The rain lets up. Some corners take their time. Watch patches of blue soften into teal and white, even while you’re parked.</p><a href="#research-wetness-evolution">A peek behind the weather ↗</a></div>
-<div class="wetness-example"><figure class="wetness-render"><div class="rain-check-label" aria-hidden="true"><span>RAIN CHECK</span><span>↘</span></div><video id="track-fade-video" width="960" height="540" controls autoplay muted loop playsinline preload="metadata" poster="assets/interlagos-local-fade-poster.png" aria-label="Interlagos track map showing different stretches gradually drying at different times"><source src="assets/interlagos-local-fade.mp4" type="video/mp4">Your browser can <a href="assets/interlagos-local-fade.mp4">watch the drying animation</a>.</video><figcaption><span>After the rain · Interlagos</span><button id="replay-track-fade" type="button" hidden>Again? <span aria-hidden="true">↺</span><span class="visually-hidden"> Replay the drying preview</span></button></figcaption></figure><ul class="wetness-legend" aria-label="Estimated surface colour scale"><li><i class="legend-dry" aria-hidden="true"></i>Dry</li><li><i class="legend-damp" aria-hidden="true"></i>Damp</li><li><i class="legend-slight" aria-hidden="true"></i>Slightly wet</li><li><i class="legend-wet" aria-hidden="true"></i>Wet</li><li><i class="legend-very" aria-hidden="true"></i>Very wet</li><li><i class="legend-extreme" aria-hidden="true"></i>Extremely wet</li></ul>
+<div class="wetness-copy"><span class="micro">A LITTLE RAIN CHECK / INTERLAGOS</span><h3 id="track-wetness-title">Well, that<br>escalated.</h3><p>A dry start. A passing storm. Then the wait for a drying line. Take a lap through it.</p><a href="#research-wetness-evolution">A peek behind the weather ↗</a></div>
+<div class="wetness-example">
+<figure class="storm-replay" id="storm-replay" aria-labelledby="storm-heading">
+<div class="storm-heading"><span id="storm-heading">INTERLAGOS / STORM REPLAY</span><span class="storm-preview">PREVIEW</span></div>
+<div class="storm-stage">
+<div class="storm-readout"><span id="storm-condition">Dry start</span><span><time id="storm-time">00:07</time><span class="storm-total"> / 31:05</span></span></div>
+<img id="storm-poster" src="assets/interlagos-storm-poster.svg" width="640" height="410" loading="lazy" alt="Interlagos tarmac and track edges before the storm.">
+<svg id="storm-map" viewBox="0 0 640 410" role="img" aria-labelledby="storm-map-title storm-map-description" hidden><title id="storm-map-title">Interlagos, through the storm</title><desc id="storm-map-description">An estimated surface changes from white through teal to blue and back as rain arrives and clears. A filled marker follows the recorded car. Outlined markers are simulated traffic.</desc><defs id="storm-gradients"></defs><g fill="none" stroke-linecap="round" stroke-linejoin="round"><path id="storm-edge" class="storm-edge"></path><path id="storm-tarmac" class="storm-tarmac"></path><g id="storm-surface" class="storm-surface"></g></g><g id="storm-traffic" aria-hidden="true"></g><g id="storm-car" aria-hidden="true"><circle r="10" class="storm-recorded-marker"></circle><text text-anchor="middle" dominant-baseline="central">78</text></g></svg>
+<div class="storm-car-key"><span><i aria-hidden="true"></i>Recorded car</span><label><input id="storm-show-traffic" type="checkbox" checked>Demo traffic</label></div>
+</div>
+<div class="storm-controls" id="storm-controls" hidden>
+<div class="storm-scrub"><label class="visually-hidden" for="storm-timeline">Storm replay time</label><input id="storm-timeline" type="range" min="7.2" max="1865.2" step="0.1" value="7.2" aria-describedby="storm-caption"></div>
+<div class="storm-transport"><button id="storm-play" type="button">Play</button><div class="storm-chapters" role="group" aria-label="Jump to a stage of the storm"><button type="button" data-storm-time="7.2">Dry</button><button type="button" data-storm-time="200.2">Wet</button><button type="button" data-storm-time="1000">Drying</button></div><label for="storm-speed" class="visually-hidden">Playback speed for surface and cars</label><select id="storm-speed"><option value="1">1×</option><option value="10">10×</option><option value="20" selected>20×</option><option value="40">40×</option></select></div>
+</div>
+<figcaption id="storm-caption">Recorded storm. Estimated surface colours.</figcaption>
+<p id="storm-error" class="storm-error" role="status" hidden>The replay couldn’t load. <button id="storm-retry" type="button">Try again</button></p>
+<noscript><p class="storm-error">Enable JavaScript to play the storm.</p></noscript>
+</figure>
+<ul class="wetness-legend" aria-label="Estimated surface colour scale"><li><i class="legend-dry" aria-hidden="true"></i>Dry</li><li><i class="legend-damp" aria-hidden="true"></i>Damp</li><li><i class="legend-slight" aria-hidden="true"></i>Slightly wet</li><li><i class="legend-wet" aria-hidden="true"></i>Wet</li><li><i class="legend-very" aria-hidden="true"></i>Very wet</li><li><i class="legend-extreme" aria-hidden="true"></i>Extremely wet</li></ul>
 </div></div>
 </section>
 </section>

@@ -206,19 +206,3 @@ function inspectPortfolioImage(item,caption){el('image-title').textContent=item.
 el('open-condition').addEventListener('click',()=>inspectPortfolioImage(CONDITION_STATES[conditionIndex],CONDITION_STATES[conditionIndex].title));
 el('open-skin').addEventListener('click',()=>inspectPortfolioImage(SPEEDO_STYLES[skinIndex],SPEEDO_STYLES[skinIndex].title));
 chooseCondition(0);chooseSkin(0);
-
-const trackFadeVideo=el('track-fade-video');
-const trackFadeMotion=window.matchMedia('(prefers-reduced-motion: reduce)');
-function applyTrackFadeMotion(){
- if(trackFadeMotion.matches){trackFadeVideo.autoplay=false;trackFadeVideo.pause();}
- else {trackFadeVideo.autoplay=true;trackFadeVideo.play().catch(()=>{});}
-}
-trackFadeMotion.addEventListener('change',applyTrackFadeMotion);
-applyTrackFadeMotion();
-
-const replayTrackFade=el('replay-track-fade');
-replayTrackFade.hidden=false;
-replayTrackFade.addEventListener('click',()=>{
- trackFadeVideo.currentTime=0;
- trackFadeVideo.play().catch(()=>{});
-});
