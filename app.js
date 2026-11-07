@@ -5,34 +5,34 @@ const INSTRUMENTS=[
     "name": "The driving instrument.",
     "category": "CAR STATE",
     "image": "assets/speedo.jpg",
-    "alt": "Current Drive Speedo with synthetic gear 4, speed 173 km/h, fuel, virtual energy, electronics and temperature values.",
-    "description": "The familiar speed/gear/RPM hierarchy sits alongside integrated electronics, fuel/energy range, thermal and damage feedback. Custom manufacturer appearances add an original visual identity.",
-    "takeaway": "Keep related information together."
+    "alt": "Drive Speedo with gear, speed, fuel, virtual energy, electronics and temperature values.",
+    "description": "Speed, gear and RPM up front, with fuel, energy and car information close by.",
+    "takeaway": "Keep the essentials close."
   },
   {
     "id": "tyres",
     "name": "Four corners, understood.",
     "category": "TYRES + BRAKES",
     "image": "assets/tyres.jpg",
-    "alt": "Current Drive tyre panel showing four soft tyres with synthetic condition, pressure, estimated rubber temperature and brake temperatures.",
-    "description": "Condition, compound, pressure, estimated rubber temperature and brake temperatures sit together. Surface-temperature colour research remains distinct from the estimated numeric tyre readout.",
-    "takeaway": "Make the type of measurement clear."
+    "alt": "Drive tyre panel showing four soft tyres with wear, pressure, estimated rubber temperature and brake temperatures.",
+    "description": "Wear, compound, pressure and temperatures, together at all four corners.",
+    "takeaway": "Stay on top of your tyres."
   },
   {
     "id": "timing",
     "name": "The lap, in context.",
     "category": "TIMING + FEEDBACK",
     "image": "assets/timing.jpg",
-    "alt": "Drive lap timing panel with synthetic lap times, sectors and a green negative delta.",
-    "description": "The Lap, Last, Best and Current stack, sector feedback and directional delta were refined against reference screenshots and driving video.",
-    "takeaway": "Reproduce the behavior as well as the layout."
+    "alt": "Drive lap timing panel with lap times, sectors and a green negative delta.",
+    "description": "Lap times, sectors and delta, ready for a quick glance.",
+    "takeaway": "Chase the next tenth."
   },
   {
     "id": "standings",
     "name": "Your place in the field.",
     "category": "RACE POSITION",
     "image": "assets/standings.jpg",
-    "alt": "Drive standings tower with synthetic Hypercar entries, the highlighted player in position 4, tyre and energy indicators.",
+    "alt": "Drive standings tower with Hypercar entries, the highlighted player in position 4, tyre and energy indicators.",
     "description": "The multiclass tower shows nearby cars in your class and the leaders of the other classes. See timing, tyres, energy and penalties, and switch views with your bindings.",
     "takeaway": "Keep race context within a glance."
   },
@@ -41,27 +41,27 @@ const INSTRUMENTS=[
     "name": "Traffic and track conditions.",
     "category": "TRACK AWARENESS",
     "image": "assets/track-map.jpg",
-    "alt": "Drive Long Beach circuit map with synthetic cars and a cyan player marker.",
+    "alt": "Long Beach circuit map with traffic and a cyan player marker.",
     "description": "All cars, Your class and Follow your car provide three perspectives. In Follow mode the player points up while the circuit and traffic move together. Choose a player marker style, follow estimated wetting and drying, compare online pace patterns and spot active yellow sectors.",
-    "takeaway": "Let the camera change; keep orientation readable."
+    "takeaway": "Know what is around the next corner."
   },
   {
     "id": "weather",
     "name": "Weather and road conditions.",
     "category": "WEATHER + FORECAST",
     "image": "assets/weather.jpg",
-    "alt": "Drive weather renderer with synthetic current conditions and a five-period forecast.",
-    "description": "Live current conditions and a five-period session forecast sit alongside one another. Measured track wetness remains distinct from forecast information.",
-    "takeaway": "Current observations and predictions mean different things."
+    "alt": "Drive weather panel with current conditions and a five-part forecast.",
+    "description": "Current conditions and the session forecast, side by side.",
+    "takeaway": "Keep one eye on the sky."
   },
   {
     "id": "flags",
     "name": "Signals that earn their space.",
     "category": "FLAGS + MESSAGES",
     "image": "assets/compact-flags.png",
-    "alt": "Current production review fixture with synthetic blue and yellow flags, green pit-service wrench, small chequered flag and Leader Finished message.",
-    "description": "Two compact animated flag surfaces, a small green pit wrench and messages outside the cloth give each signal a defined role. During a stop, the pit service card below shows the estimate, elapsed time and job status.",
-    "takeaway": "Fit the warning to the space available.",
+    "alt": "Race flags, a green pit-service wrench and a Leader Finished message.",
+    "description": "Race warnings and pit-service updates appear when you need them. Follow your stop with elapsed time and each job’s progress.",
+    "takeaway": "A quick glance, then back to the race.",
     "compact": true
   }
 ];
@@ -70,22 +70,22 @@ const RESEARCH=[
     "id": "engine-context",
     "title": "That doesn’t sound right.",
     "image": "assets/damage-engine.jpg",
-    "alt": "Drive engine-warning example with red engine and oil indications, using demonstration data.",
+    "alt": "Drive engine and oil warnings.",
     "copy": "Heat and suspected engine failure get their own cues."
   },
   {
     "id": "tyre-research",
     "title": "Four little contact patches.",
     "image": "assets/tyres.jpg",
-    "alt": "Drive tyre panel showing all four tyres with wear and temperature information, using demonstration data.",
+    "alt": "Drive tyre panel showing wear and temperatures at all four corners.",
     "copy": "A quick glance at the rubber doing all the hard work."
   },
   {
     "id": "wetness-evolution",
     "title": "After the rain.",
     "image": "assets/interlagos-local-fade-poster.png",
-    "alt": "Interlagos development preview with different stretches coloured white, teal and blue.",
-    "copy": "The road keeps changing while you’re parked. Surface colours are estimates; this preview’s drying times are illustrative."
+    "alt": "Interlagos track map with different stretches coloured white, teal and blue.",
+    "copy": "Blue gives way to teal and white as the track dries."
   }
 ];
 const el=id=>document.getElementById(id);
@@ -103,7 +103,7 @@ function choosePanel(index,focus=false){
   el('plate-category').textContent=item.category;
   el('plate-image').src=item.image;el('plate-image').alt=item.alt;el('plate-image').classList.toggle('compact',!!item.compact);
   el('plate-title').textContent=item.name;el('plate-description').textContent=item.description;
-  el('plate-takeaway').replaceChildren(Object.assign(document.createElement('span'),{textContent:'KEY POINT'}),document.createTextNode(item.takeaway));
+  el('plate-takeaway').textContent=item.takeaway;
   el('open-image').setAttribute('aria-label','Enlarge '+item.name.replace(/\.$/,'')+' screenshot');
 }
 tabs.forEach((tab,index)=>{
@@ -135,7 +135,7 @@ indexDialog.addEventListener('close',unlockScroll);
 indexDialog.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>indexDialog.close()));
 el('open-image').addEventListener('click',()=>{
  const item=INSTRUMENTS[activePanel];el('image-title').textContent=item.name.toUpperCase();el('dialog-image').src=item.image;el('dialog-image').alt=item.alt;el('dialog-image').classList.toggle('compact',!!item.compact);
- el('dialog-caption').textContent=item.compact?'Drive gallery · demonstration notices':'Drive gallery · demonstration telemetry';
+ el('dialog-caption').textContent=item.name;
  imageDialog.showModal();lockScroll();
 });
 el('close-image').addEventListener('click',()=>imageDialog.close());
@@ -164,11 +164,11 @@ choosePanel(0);
 
 // Portfolio-only image comparisons; all images are captures of the production renderer.
 const CONDITION_STATES=[
- {id:'corners',title:'Localise the damage.',image:'assets/damage-corners.jpg',alt:'Drive car diagram with front and left body damage plus independently coloured suspension corners.',description:'The car diagram keeps eight bodywork locations and all four suspension corners independent. This example combines front and left body damage with different suspension severities at three corners.',takeaway:'Location, severity and component presence need separate signals.'},
- {id:'puncture',title:'Recognise a puncture.',image:'assets/damage-puncture.jpg',alt:'Drive Speedo with an amber warning on the front-left tyre, captured at the strong warning phase.',description:'A native flat-tyre state produces an amber pulse at that corner. Its fading phase reveals the live thermal colour underneath. Low positive wear has its own steady warning rules.',takeaway:'Actual flatness and remaining wear should not be confused by a rounded number.'},
- {id:'detachment',title:'See the whole affected corner.',image:'assets/damage-detachment.jpg',alt:'Drive Speedo with coordinated red front-left tyre, brake and suspension warnings and a separate rear-wing warning.',description:'A confirmed missing wheel coordinates red tyre, brake and suspension overlays at the same corner. This example also shows the separate rear-wing warning from Drive’s implemented body-detachment mapping.',takeaway:'A lost component should remain recognisable across every representation of it.'},
- {id:'overheating',title:'Read the thermal warning.',image:'assets/damage-overheating.jpg',alt:'Drive Speedo with an orange engine indicator and red oil-temperature indication for raw overheating.',description:'An orange engine symbol and red oil feedback call out overheating. Suspected engine failure has its own red engine warning.',takeaway:'See which engine warning needs your attention.'},
- {id:'engine',title:'Interpret the stopped engine.',image:'assets/damage-engine.jpg',alt:'Drive Speedo at zero speed and neutral with the red inferred engine-failure indicator.',description:'A red engine warning represents the admitted inferred-failure state. The underlying logic considers heat, impact and lifecycle context, protects stalls, pit power-off and fuel exhaustion, and permits correction after a successful restart.',takeaway:'The display needs the cause and context, not just zero RPM.'}
+ {id:'corners',title:'Localise the damage.',image:'assets/damage-corners.jpg',alt:'Drive car diagram with front and left body damage plus independently coloured suspension corners.',description:'Spot bodywork and suspension damage at a glance, right down to the affected corner.',takeaway:'Know which corner needs attention.'},
+ {id:'puncture',title:'Recognise a puncture.',image:'assets/damage-puncture.jpg',alt:'Drive Speedo with an amber warning on the front-left tyre, with a pulsing puncture warning.',description:'A pulsing amber warning highlights the punctured tyre. Low wear has its own steady warning.',takeaway:'Find the tyre that needs a closer look.'},
+ {id:'detachment',title:'See the whole affected corner.',image:'assets/damage-detachment.jpg',alt:'Drive Speedo with coordinated red front-left tyre, brake and suspension warnings and a separate rear-wing warning.',description:'A missing wheel highlights the affected tyre, brake and suspension in red. A separate warning calls out a lost rear wing.',takeaway:'See the damage before heading back out.'},
+ {id:'overheating',title:'Read the thermal warning.',image:'assets/damage-overheating.jpg',alt:'Drive Speedo with an orange engine indicator and red oil-temperature indication for overheating.',description:'An orange engine symbol and red oil feedback call out overheating. Suspected engine failure has its own red engine warning.',takeaway:'See which engine warning needs your attention.'},
+ {id:'engine',title:'Interpret the stopped engine.',image:'assets/damage-engine.jpg',alt:'Drive Speedo at zero speed and neutral with a red engine warning.',description:'A red engine warning flags a suspected failure. Read it alongside the temperature and damage warnings.',takeaway:'Know when to head back to the pits.'}
 ];
 const SPEEDO_STYLES=[
  {id:'bmw',title:'BMW M Hybrid V8',design:'72 ANGLED SEGMENTS',description:'Angled segments and a blue/cyan palette give the BMW profile its character. Speed, gear and warning cues stay in familiar places.'},
@@ -176,8 +176,8 @@ const SPEEDO_STYLES=[
  {id:'aston',title:'Aston Martin Valkyrie',design:'CONTINUOUS COLOUR BAND',description:'An unbroken arc uses green, lime, amber and red zones. Its continuous geometry gives the same driving information a different visual rhythm.'},
  {id:'porsche',title:'Porsche 963',design:'60 FINE ROUNDED BLOCKS',description:'Fine rounded blocks progress from silver through cyan to blue. The manufacturer identity changes the appearance while the warning and RPM states retain their meaning.'},
  {id:'cadillac',title:'Cadillac V-Series.R',design:'40 BROAD CURVED BLOCKS',description:'Broad curved blocks and a silver, gold, amber and red palette create a more widely spaced instrument treatment.'},
- {id:'alpine',title:'Alpine A424',design:'120 FINE RADIAL TICKS',description:'A dense set of fine radial ticks uses blue, white and red, demonstrating the sixth original RPM-arc family.'}
-].map(s=>({...s,image:'assets/custom-speedo-'+s.id+'.jpg',alt:'Production Drive custom '+s.title+' Speedo, '+s.design.toLowerCase()+', using demonstration telemetry.'}));
+ {id:'alpine',title:'Alpine A424',design:'120 FINE RADIAL TICKS',description:'A dense set of fine radial ticks uses blue, white and red, for a crisp, detailed arc.'}
+].map(s=>({...s,image:'assets/custom-speedo-'+s.id+'.jpg',alt:s.title+' Speedo with '+s.design.toLowerCase()+'.'}));
 let conditionIndex=0,skinIndex=0;
 function setChoiceTabs(selector,index,panelId,focus=false){
  const list=[...document.querySelectorAll(selector)];
@@ -188,7 +188,7 @@ function chooseCondition(index,focus=false){
  conditionIndex=(index+CONDITION_STATES.length)%CONDITION_STATES.length;const c=CONDITION_STATES[conditionIndex];
  setChoiceTabs('[data-condition]',conditionIndex,'condition-panel',focus);
  el('condition-image').src=c.image;el('condition-image').alt=c.alt;el('condition-title').textContent=c.title;el('condition-description').textContent=c.description;
- el('condition-takeaway').replaceChildren(Object.assign(document.createElement('span'),{textContent:'TAKEAWAY'}),document.createTextNode(c.takeaway));
+ el('condition-takeaway').textContent=c.takeaway;
 }
 function chooseSkin(index,focus=false){
  skinIndex=(index+SPEEDO_STYLES.length)%SPEEDO_STYLES.length;const c=SPEEDO_STYLES[skinIndex];
@@ -203,8 +203,8 @@ function bindChoiceTabs(selector,choose){
 }
 bindChoiceTabs('[data-condition]',chooseCondition);bindChoiceTabs('[data-skin]',chooseSkin);
 function inspectPortfolioImage(item,caption){el('image-title').textContent=item.title.toUpperCase();el('dialog-image').src=item.image;el('dialog-image').alt=item.alt;el('dialog-image').classList.remove('compact');el('dialog-caption').textContent=caption;imageDialog.showModal();lockScroll();}
-el('open-condition').addEventListener('click',()=>inspectPortfolioImage(CONDITION_STATES[conditionIndex],'Drive production renderer · synthetic condition example · 5 November 2026'));
-el('open-skin').addEventListener('click',()=>inspectPortfolioImage(SPEEDO_STYLES[skinIndex],'Original custom Speedo design by ConvexRook · production renderer · demonstration telemetry'));
+el('open-condition').addEventListener('click',()=>inspectPortfolioImage(CONDITION_STATES[conditionIndex],CONDITION_STATES[conditionIndex].title));
+el('open-skin').addEventListener('click',()=>inspectPortfolioImage(SPEEDO_STYLES[skinIndex],SPEEDO_STYLES[skinIndex].title));
 chooseCondition(0);chooseSkin(0);
 
 const trackFadeVideo=el('track-fade-video');
