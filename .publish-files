@@ -28,8 +28,6 @@ assets/drive-hud-0637.png
 assets/drive-icon.png
 assets/drive-wordmark.png
 assets/flag-motion.jpg
-assets/interlagos-local-fade-poster.png
-assets/interlagos-local-fade.mp4
 assets/lmu-reference-oct7.png
 assets/october-reconstruction.svg
 assets/portfolio-car-condition.jpg
@@ -59,7 +57,7 @@ tour.js
 .publish-files
 community.css
 assets/discord-mark.svg
-storm-replay.css
-storm-replay.js
-assets/interlagos-storm.json
-assets/interlagos-storm-poster.svg
+imola-replay.js
+imola-replay.css
+assets/imola-wetness.json
+assets/imola-wetness-poster.svg

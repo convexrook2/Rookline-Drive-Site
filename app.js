@@ -83,8 +83,8 @@ const RESEARCH=[
   {
     "id": "wetness-evolution",
     "title": "After the rain.",
-    "image": "assets/interlagos-local-fade-poster.png",
-    "alt": "Interlagos track map with different stretches coloured white, teal and blue.",
+    "image": "assets/imola-wetness-poster.svg",
+    "alt": "Imola track map with different stretches coloured white, teal and blue.",
     "copy": "Blue gives way to teal and white as the track dries."
   }
 ];
