@@ -82,10 +82,11 @@ const RESEARCH=[
   },
   {
     "id": "wetness-evolution",
-    "title": "After the rain.",
-    "image": "assets/imola-wetness-poster.svg",
-    "alt": "Imola track map with different stretches coloured white, teal and blue.",
-    "copy": "Blue gives way to teal and white as the track dries."
+    "title": "When the sky changes its mind.",
+    "image": "assets/imola-wetness-comparison.png",
+    "alt": "Historical Imola comparison: LMU wetness in steps, Drive's recorded track average and a weather-only reference. The lower plot shows the contribution of recorded tyre observations.",
+    "copy": "An earlier Imola storm, seen two ways. Game-reported stages alongside Drive’s smooth estimate.",
+    "chart": true
   }
 ];
 const el=id=>document.getElementById(id);
@@ -123,7 +124,14 @@ for(const note of RESEARCH){
  const article=node('article','visual-note');article.id='research-'+note.id;
  const image=node('img');image.src=note.image;image.alt=note.alt;image.loading='lazy';
  image.width=1363;image.height=936;
- article.append(image,node('h3','',note.title),node('p','',note.copy));
+ if(note.chart){
+  article.classList.add('visual-note--chart');image.width=1540;image.height=1050;
+  const link=node('a','research-chart-open');link.href=note.image;link.target='_blank';link.rel='noopener noreferrer';
+  link.setAttribute('aria-label','View the full Imola comparison (opens in a new tab)');
+  link.append(image,node('span','research-chart-action','View full comparison ↗'));
+  const caption=node('div','research-chart-copy');caption.append(node('span','micro','IMOLA / 7 NOVEMBER 2026 / EARLIER MODEL'),node('h3','',note.title),node('p','',note.copy));
+  article.append(link,caption);
+ }else article.append(image,node('h3','',note.title),node('p','',note.copy));
  el('research-notes').append(article);
 }
 const indexDialog=el('index-dialog'),imageDialog=el('image-dialog');
