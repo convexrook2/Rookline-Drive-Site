@@ -63,3 +63,7 @@ assets/imola-wetness.json
 assets/imola-wetness-poster.svg
 assets/imola-wetness-comparison.png
 research-chart.css
+race-replays.css
+daytona-embed.js
+previews/daytona-race.html
+previews/replay-controls.css
